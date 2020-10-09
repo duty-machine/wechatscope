@@ -15,6 +15,8 @@ async function fetchArticle(meta) {
   let res = await fetch(`https://wechatscope.jmsc.hku.hk/api/html?fn=${meta.archive}`)
   let text = await res.text()
 
+  if (text.match('Faithfully yours, nginx.')) return
+
   fs.writeFileSync(path, `<!-- ${JSON.stringify(meta)} -->\n${text}`)
 }
 
